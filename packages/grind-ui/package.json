@@ -4,24 +4,41 @@
   "description": "Modern playful analytics dashboard UI library for React Native & Expo",
   "main": "src/index.ts",
   "types": "src/index.ts",
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "lint": "eslint src/",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
-  "keywords": ["react-native", "expo", "ui", "components", "dashboard", "analytics"],
+  "keywords": [
+    "react-native",
+    "expo",
+    "ui",
+    "components",
+    "dashboard",
+    "analytics"
+  ],
   "license": "MIT",
   "peerDependencies": {
+    "expo": ">=49.0.0",
+    "expo-haptics": ">=12.0.0",
+    "expo-linear-gradient": ">=12.0.0",
     "react": ">=18.0.0",
     "react-native": ">=0.72.0",
-    "expo": ">=49.0.0",
-    "react-native-reanimated": ">=3.3.0",
-    "expo-haptics": ">=12.0.0",
-    "expo-linear-gradient": ">=12.0.0"
+    "react-native-reanimated": ">=3.3.0"
   },
   "devDependencies": {
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.3.3",
+    "@types/jest": "^30.0.0",
     "@types/react": "^18.2.0",
     "@types/react-native": "^0.72.0",
+    "jest": "^29.7.0",
+    "jest-expo": "^54.0.17",
     "typescript": "^5.2.0"
   }
 }

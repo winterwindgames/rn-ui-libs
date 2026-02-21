@@ -49,6 +49,16 @@ const TabItem: React.FC<{
         size: 24,
         focused: active,
       })}
+      <Text
+        style={{
+          fontSize: 10,
+          fontWeight: active ? '700' : '500',
+          color: active ? accentColor : mutedColor,
+          marginTop: 2,
+        }}
+      >
+        {item.label}
+      </Text>
       <Animated.View
         style={[styles.dot, { backgroundColor: accentColor }, dotStyle]}
       />
@@ -76,7 +86,7 @@ export const TabBar: React.FC<TabBarProps> = ({
           marginBottom: spacing.lg,
           paddingHorizontal: spacing.md,
           paddingVertical: spacing.sm,
-          ...shadows.medium,
+          ...(shadows.md ?? {}),
         },
         style,
       ]}
@@ -89,8 +99,8 @@ export const TabBar: React.FC<TabBarProps> = ({
           item={item}
           active={activeKey === item.key}
           onPress={() => onTabPress(item.key)}
-          accentColor={colors.accent}
-          mutedColor={colors.textMuted}
+          accentColor={colors.primary}
+          mutedColor={colors.textMuted ?? '#636366'}
           testID={`${testID}-${item.key}`}
         />
       ))}

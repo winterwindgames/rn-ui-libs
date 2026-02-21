@@ -527,15 +527,16 @@ Top navigation bar with title, back button, and right action icons.
 | `bg` | `string` | Background override |
 
 ### TabBar
-Bottom tab bar with icons, labels, and animated indicator.
+Bottom tab bar with icons, labels, animated indicator, and clear active state.
 
 | Prop | Type | Notes |
 |------|------|-------|
-| `tabs` | `{ icon: ReactNode; label: string }[]` | Tab items |
-| `activeIndex` | `number` | Selected tab |
-| `onTabPress` | `(index: number) => void` | Handler |
+| `items` | `{ key: string; icon: RenderFn; label: string }[]` | Tab items with icon render function |
+| `activeKey` | `string` | Selected tab key |
+| `onTabPress` | `(key: string) => void` | Handler |
 
-**Animations:** Scale on active tab (Reanimated).
+**Active State:** Active tab shows primary color on icon + label, bold weight, and an animated dot indicator below. Inactive tabs use muted color and normal weight.
+**Animations:** Scale-down spring on press (Reanimated). Active dot fades/scales in with spring. Icon color transitions.
 
 ### Breadcrumb
 Navigation breadcrumb trail.
@@ -776,7 +777,8 @@ Horizontal top tab bar with content panels. Different from SegmentedControl (whi
 | `scrollable` | `boolean` | Horizontally scrollable tabs (for many tabs) |
 | `lazy` | `boolean` | Only render active tab content (default: false) |
 
-**Animations:** Sliding underline indicator (Reanimated). Content can fade/slide on switch.
+**Active State:** Active tab has primary color text, bold weight. Inactive tabs use muted color and normal weight. For 'filled' variant, active tab gets primary background with inverse text. For 'pill' variant, active tab gets surface background.
+**Animations:** Sliding underline indicator with `withTiming` (Reanimated). Indicator smoothly translates and resizes to match active tab width. Content can fade/slide on switch.
 
 ### ToggleGroup / ButtonGroup
 Group of buttons where one (single) or many (multi) can be selected. Different from SegmentedControl — ToggleGroup supports multi-select and custom button content.

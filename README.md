@@ -38,6 +38,7 @@ Start here before creating or modifying any library:
 2. **[ARCHITECTURE.md](./docs/ARCHITECTURE.md)** — How to build it (file structure, code patterns, conventions)
 3. **[THEMING.md](./docs/THEMING.md)** — How to design the theme (tokens, colors, typography, dark mode)
 4. **[DEMO-APP.md](./docs/DEMO-APP.md)** — How to showcase it (example app structure and sections)
+5. **[TESTING.md](./docs/TESTING.md)** — How to test it (unit tests, interaction tests, accessibility tests)
 
 ## Tech Stack
 

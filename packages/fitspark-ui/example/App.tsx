@@ -26,6 +26,12 @@ import {
   Divider,
   Spacer,
   Box,
+  Menu,
+  Drawer,
+  Tabs,
+  ToggleGroup,
+  SpeedDial,
+  Link,
 } from '../src';
 
 // ─── Layout Constants (8pt grid) ────────────────────────────────────
@@ -70,6 +76,11 @@ function ShowcaseContent() {
   const [segment, setSegment] = useState('weekly');
   const [activeTab, setActiveTab] = useState('home');
   const [inputText, setInputText] = useState('');
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [topTab, setTopTab] = useState(0);
+  const [toggleValue, setToggleValue] = useState('reps');
+  const [speedDialOpen, setSpeedDialOpen] = useState(false);
 
   const lime = theme.colors.primary;
   const s = theme.spacing;
@@ -406,7 +417,100 @@ function ShowcaseContent() {
             </Button>
           </View>
         </Section>
+
+        {/* ── New Components ─────────────────────────────────── */}
+        <Section>
+          <SectionTitle>Menu & Navigation</SectionTitle>
+
+          <View style={{ flexDirection: 'row', gap: 12, flexWrap: 'wrap' }}>
+            <Menu
+              visible={menuVisible}
+              onClose={() => setMenuVisible(false)}
+              trigger={
+                <Button
+                  label="Open Menu"
+                  variant="outline"
+                  size="sm"
+                  onPress={() => setMenuVisible(true)}
+                />
+              }
+              items={[
+                { label: 'Edit Workout', icon: <Ionicons name="pencil" size={18} color={theme.colors.text} />, onPress: () => { setMenuVisible(false); toast.show({ message: 'Edit', type: 'info' }); } },
+                { label: 'Duplicate', icon: <Ionicons name="copy" size={18} color={theme.colors.text} />, onPress: () => { setMenuVisible(false); toast.show({ message: 'Duplicated', type: 'success' }); } },
+                { label: 'Delete', destructive: true, icon: <Ionicons name="trash" size={18} color={theme.colors.error} />, onPress: () => { setMenuVisible(false); toast.show({ message: 'Deleted', type: 'error' }); } },
+              ]}
+            />
+
+            <Button
+              label="Open Drawer"
+              variant="outline"
+              size="sm"
+              onPress={() => setDrawerVisible(true)}
+            />
+          </View>
+
+          <Spacer size="lg" />
+          <Link href="https://github.com/winterwindgames/rn-ui-libs" color={lime}>
+            View on GitHub ↗
+          </Link>
+        </Section>
+
+        <Section>
+          <SectionTitle>Tabs</SectionTitle>
+          <Tabs
+            tabs={[
+              { label: 'Overview', content: <Text style={{ color: theme.colors.text, ...theme.typography.body, padding: 16 }}>Your weekly overview with stats and progress tracking.</Text> },
+              { label: 'History', content: <Text style={{ color: theme.colors.text, ...theme.typography.body, padding: 16 }}>View your past workouts and personal records.</Text> },
+              { label: 'Goals', content: <Text style={{ color: theme.colors.text, ...theme.typography.body, padding: 16 }}>Set and track your fitness goals here.</Text> },
+            ]}
+            activeIndex={topTab}
+            onTabChange={setTopTab}
+            variant="underline"
+          />
+        </Section>
+
+        <Section>
+          <SectionTitle>Toggle Group</SectionTitle>
+          <ToggleGroup
+            type="single"
+            value={toggleValue}
+            onValueChange={(v) => setToggleValue(v as string)}
+            items={[
+              { value: 'reps', label: 'Reps' },
+              { value: 'time', label: 'Time' },
+              { value: 'distance', label: 'Distance' },
+            ]}
+          />
+        </Section>
+
       </ScrollView>
+
+      {/* ── Drawer (rendered at root level) ────────────────── */}
+      <Drawer
+        visible={drawerVisible}
+        onClose={() => setDrawerVisible(false)}
+        side="left"
+        header={
+          <View style={{ padding: 24, paddingTop: 60 }}>
+            <Text style={{ color: theme.colors.text, ...theme.typography.h4 }}>Menu</Text>
+          </View>
+        }
+      >
+        <View style={{ padding: 16 }}>
+          {['Dashboard', 'Workouts', 'Nutrition', 'Settings'].map((item) => (
+            <Pressable
+              key={item}
+              onPress={() => {
+                setDrawerVisible(false);
+                toast.show({ message: `${item} tapped`, type: 'info' });
+              }}
+              style={{ paddingVertical: 16, borderBottomWidth: 1, borderBottomColor: theme.colors.border }}
+            >
+              <Text style={{ color: theme.colors.text, ...theme.typography.body }}>{item}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </Drawer>
 
       {/* ── Tab Bar ──────────────────────────────────────────── */}
       <TabBar
@@ -445,11 +549,17 @@ function ShowcaseContent() {
       />
 
       {/* ── FAB ──────────────────────────────────────────────── */}
-      <FAB
+      <SpeedDial
         icon={<Ionicons name="add" size={26} color="#0D0D0D" />}
-        onPress={() => toast.show({ message: 'Quick-add workout', type: 'info' })}
+        openIcon={<Ionicons name="close" size={26} color="#0D0D0D" />}
+        open={speedDialOpen}
+        onToggle={setSpeedDialOpen}
         position="bottom-right"
-        style={{ bottom: TAB_BAR_HEIGHT + 16, right: SCREEN_PAD }}
+        actions={[
+          { icon: <Ionicons name="barbell" size={20} color="#0D0D0D" />, label: 'Workout', onPress: () => { setSpeedDialOpen(false); toast.show({ message: 'New workout', type: 'success' }); } },
+          { icon: <Ionicons name="restaurant" size={20} color="#0D0D0D" />, label: 'Meal', onPress: () => { setSpeedDialOpen(false); toast.show({ message: 'Log meal', type: 'info' }); } },
+          { icon: <Ionicons name="water" size={20} color="#0D0D0D" />, label: 'Water', onPress: () => { setSpeedDialOpen(false); toast.show({ message: 'Logged water', type: 'success' }); } },
+        ]}
       />
 
       <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />

@@ -50,6 +50,13 @@ import {
   Accordion,
   AccordionItem,
   EmptyState,
+  // New Components
+  Menu,
+  Drawer,
+  Tabs,
+  ToggleGroup,
+  SpeedDial,
+  Link,
 } from '../src';
 
 // ─── Section Wrapper ──────────────────────────────────────────────────────────
@@ -84,6 +91,11 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
   const [tabIndex, setTabIndex] = useState(0);
   const [textValue, setTextValue] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [drawerVisible, setDrawerVisible] = useState(false);
+  const [topTab, setTopTab] = useState(0);
+  const [toggleValue, setToggleValue] = useState('daily');
+  const [speedDialOpen, setSpeedDialOpen] = useState(false);
 
   return (
     <SafeAreaBox style={{ flex: 1, backgroundColor: theme.colors.background }}>
@@ -451,6 +463,57 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
           />
         </Section>
 
+        {/* ── Menu & Navigation ────────────────────────────── */}
+        <Section title="Menu & Navigation">
+          <HStack style={{ gap: 12, flexWrap: 'wrap' }}>
+            <Menu
+              visible={menuVisible}
+              onClose={() => setMenuVisible(false)}
+              trigger={
+                <Button label="Open Menu" variant="outline" size="sm" onPress={() => setMenuVisible(true)} />
+              }
+              items={[
+                { label: 'Edit', icon: <Ionicons name="pencil" size={18} color={theme.colors.text} />, onPress: () => { setMenuVisible(false); showToast({ message: 'Edit tapped', variant: 'info' }); } },
+                { label: 'Share', icon: <Ionicons name="share" size={18} color={theme.colors.text} />, onPress: () => { setMenuVisible(false); showToast({ message: 'Shared!', variant: 'success' }); } },
+                { label: 'Delete', destructive: true, icon: <Ionicons name="trash" size={18} color={theme.colors.error ?? '#E37461'} />, onPress: () => { setMenuVisible(false); showToast({ message: 'Deleted', variant: 'error' }); } },
+              ]}
+            />
+            <Button label="Open Drawer" variant="outline" size="sm" onPress={() => setDrawerVisible(true)} />
+          </HStack>
+          <Spacer size="md" />
+          <Link href="https://github.com/winterwindgames/rn-ui-libs" color={theme.colors.primary}>
+            View on GitHub ↗
+          </Link>
+        </Section>
+
+        {/* ── Tabs ────────────────────────────────────────────── */}
+        <Section title="Top Tabs">
+          <Tabs
+            tabs={[
+              { label: 'Daily', content: <Text variant="body" style={{ padding: 16, color: theme.colors.text }}>Today's overview with tasks and metrics.</Text> },
+              { label: 'Weekly', content: <Text variant="body" style={{ padding: 16, color: theme.colors.text }}>Your weekly summary and trends.</Text> },
+              { label: 'Monthly', content: <Text variant="body" style={{ padding: 16, color: theme.colors.text }}>Monthly performance and goals.</Text> },
+            ]}
+            activeIndex={topTab}
+            onTabChange={setTopTab}
+            variant="underline"
+          />
+        </Section>
+
+        {/* ── Toggle Group ────────────────────────────────────── */}
+        <Section title="Toggle Group">
+          <ToggleGroup
+            type="single"
+            value={toggleValue}
+            onValueChange={(v) => setToggleValue(v as string)}
+            items={[
+              { value: 'daily', label: 'Daily' },
+              { value: 'weekly', label: 'Weekly' },
+              { value: 'monthly', label: 'Monthly' },
+            ]}
+          />
+        </Section>
+
         <Spacer size="xxl" />
         <Text
           variant="caption"
@@ -460,8 +523,39 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
         </Text>
       </ScrollView>
 
-      {/* Floating Action Button */}
-      <FAB icon={<Ionicons name="add" size={24} color="#fff" />} onPress={() => showToast({ message: 'New workout!', variant: 'info' })} />
+      {/* ── Drawer ────────────────────────────────────────────── */}
+      <Drawer
+        visible={drawerVisible}
+        onClose={() => setDrawerVisible(false)}
+        side="left"
+        header={
+          <View style={{ padding: 24, paddingTop: 60 }}>
+            <Text variant="h3" style={{ color: theme.colors.text }}>GRIND</Text>
+          </View>
+        }
+      >
+        <View style={{ padding: 16 }}>
+          {['Dashboard', 'Analytics', 'Reports', 'Settings'].map((item) => (
+            <View key={item} style={{ paddingVertical: 16, borderBottomWidth: 1, borderBottomColor: theme.colors.border ?? '#333' }}>
+              <Text variant="body" style={{ color: theme.colors.text }}>{item}</Text>
+            </View>
+          ))}
+        </View>
+      </Drawer>
+
+      {/* ── Speed Dial ────────────────────────────────────────── */}
+      <SpeedDial
+        icon={<Ionicons name="add" size={24} color="#fff" />}
+        openIcon={<Ionicons name="close" size={24} color="#fff" />}
+        open={speedDialOpen}
+        onToggle={setSpeedDialOpen}
+        position="bottom-right"
+        actions={[
+          { icon: <Ionicons name="document-text" size={18} color="#fff" />, label: 'Note', onPress: () => { setSpeedDialOpen(false); showToast({ message: 'New note', variant: 'success' }); } },
+          { icon: <Ionicons name="calendar" size={18} color="#fff" />, label: 'Event', onPress: () => { setSpeedDialOpen(false); showToast({ message: 'New event', variant: 'info' }); } },
+          { icon: <Ionicons name="checkmark-circle" size={18} color="#fff" />, label: 'Task', onPress: () => { setSpeedDialOpen(false); showToast({ message: 'New task', variant: 'success' }); } },
+        ]}
+      />
     </SafeAreaBox>
   );
 };
