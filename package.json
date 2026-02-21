@@ -1,0 +1,7 @@
+{
+  "name": "rn-ui-libs",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

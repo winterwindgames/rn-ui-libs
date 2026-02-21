@@ -1,0 +1,27 @@
+{
+  "name": "grind-ui",
+  "version": "1.0.0",
+  "description": "Modern playful analytics dashboard UI library for React Native & Expo",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": ["src"],
+  "scripts": {
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["react-native", "expo", "ui", "components", "dashboard", "analytics"],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0",
+    "expo": ">=49.0.0",
+    "react-native-reanimated": ">=3.3.0",
+    "expo-haptics": ">=12.0.0",
+    "expo-linear-gradient": ">=12.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-native": "^0.72.0",
+    "typescript": "^5.2.0"
+  }
+}

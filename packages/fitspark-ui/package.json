@@ -1,0 +1,21 @@
+{
+  "name": "fitspark-ui",
+  "version": "1.0.0",
+  "description": "Premium dark fitness UI library for React Native & Expo",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": ["src/"],
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["react-native", "ui", "fitness", "expo", "dark-theme"],
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.72.0",
+    "expo": ">=49.0.0",
+    "react-native-reanimated": ">=3.0.0",
+    "expo-haptics": ">=12.0.0",
+    "expo-linear-gradient": ">=12.0.0"
+  }
+}
