@@ -727,4 +727,99 @@ Every component **MUST** have:
 7. ✅ **`testID` prop** — for testing frameworks
 8. ✅ **Named export** — no default exports
 
-## Total: 67 components
+## Total: 73 components
+
+---
+
+## 🆕 Additional Components (6)
+
+### Menu / DropdownMenu
+Dropdown action menu anchored to a trigger button. Different from Select (which is for form value selection) — Menu is for actions/navigation.
+
+| Prop | Type | Notes |
+|------|------|-------|
+| `trigger` | `ReactNode` | The element that opens the menu |
+| `items` | `{ label: string; icon?: ReactNode; onPress: () => void; destructive?: boolean; disabled?: boolean }[]` | Menu items |
+| `visible` | `boolean` | Controlled show/hide |
+| `onClose` | `() => void` | Close handler |
+| `placement` | `'top' \| 'bottom' \| 'left' \| 'right'` | Preferred position |
+
+**Implementation:** Uses `Portal` to render at root level. Measures trigger position to anchor the dropdown. Backdrop press to dismiss.
+**Animations:** Fade + scale-in from anchor point (Reanimated).
+
+### Drawer
+Side navigation panel that slides in from the left or right edge.
+
+| Prop | Type | Notes |
+|------|------|-------|
+| `visible` | `boolean` | Open/close state |
+| `onClose` | `() => void` | Close handler |
+| `side` | `'left' \| 'right'` | Slide direction (default: left) |
+| `width` | `number \| string` | Drawer width (default: 80% of screen) |
+| `header` | `ReactNode` | Top section (logo, user info) |
+| `footer` | `ReactNode` | Bottom section (settings, logout) |
+| `children` | `ReactNode` | Drawer content (typically ListItems) |
+| `overlay` | `boolean` | Show backdrop (default: true) |
+
+**Implementation:** Absolute positioned View with backdrop. Uses `PanResponder` for swipe-to-close gesture.
+**Animations:** Slide in/out with backdrop fade (Reanimated `withTiming`).
+
+### Tabs (Top Tabs)
+Horizontal top tab bar with content panels. Different from SegmentedControl (which is a compact input) — Tabs have full content areas.
+
+| Prop | Type | Notes |
+|------|------|-------|
+| `tabs` | `{ label: string; icon?: ReactNode; content: ReactNode }[]` | Tab definitions |
+| `activeIndex` | `number` | Controlled active tab |
+| `onTabChange` | `(index: number) => void` | Tab switch handler |
+| `variant` | `'underline' \| 'filled' \| 'pill'` | Tab style |
+| `scrollable` | `boolean` | Horizontally scrollable tabs (for many tabs) |
+| `lazy` | `boolean` | Only render active tab content (default: false) |
+
+**Animations:** Sliding underline indicator (Reanimated). Content can fade/slide on switch.
+
+### ToggleGroup / ButtonGroup
+Group of buttons where one (single) or many (multi) can be selected. Different from SegmentedControl — ToggleGroup supports multi-select and custom button content.
+
+| Prop | Type | Notes |
+|------|------|-------|
+| `type` | `'single' \| 'multiple'` | Selection mode |
+| `value` | `string \| string[]` | Selected value(s) |
+| `onValueChange` | `(value: string \| string[]) => void` | Handler |
+| `items` | `{ value: string; label: string; icon?: ReactNode; disabled?: boolean }[]` | Button items |
+| `size` | `'sm' \| 'md' \| 'lg'` | Button size |
+| `orientation` | `'horizontal' \| 'vertical'` | Layout direction |
+
+**Implementation:** Shared border radius on first/last items (grouped look). Active state uses primary color.
+
+### SpeedDial
+Expandable FAB that reveals sub-action buttons when pressed. Extends our existing FAB concept.
+
+| Prop | Type | Notes |
+|------|------|-------|
+| `icon` | `ReactNode` | Main FAB icon (shown when closed) |
+| `openIcon` | `ReactNode` | Icon when expanded (default: X/close) |
+| `actions` | `{ icon: ReactNode; label?: string; onPress: () => void; color?: string }[]` | Sub-action buttons |
+| `open` | `boolean` | Controlled open state |
+| `onToggle` | `(open: boolean) => void` | Toggle handler |
+| `position` | `'bottom-right' \| 'bottom-left'` | Placement |
+| `overlay` | `boolean` | Show backdrop when open |
+
+**Animations:** Main icon rotation (45° to X). Sub-actions stagger in from bottom with scale + fade (Reanimated).
+
+### Link
+Styled pressable text for opening URLs or triggering navigation. Similar to Button variant="link" but designed for inline text usage.
+
+| Prop | Type | Notes |
+|------|------|-------|
+| `href` | `string` | URL to open (uses `Linking.openURL`) |
+| `onPress` | `() => void` | Custom press handler (overrides href) |
+| `children` | `string \| ReactNode` | Link content |
+| `color` | `string` | Link color (default: primary) |
+| `underline` | `'always' \| 'hover' \| 'none'` | Underline style |
+| `size` | `'sm' \| 'md' \| 'lg'` | Text size |
+| `external` | `boolean` | Show external link icon |
+| `disabled` | `boolean` | Disabled state |
+
+**Implementation:** Wraps `Text` in `Pressable`, calls `Linking.openURL(href)` on press.
+**Animations:** Opacity feedback on press.

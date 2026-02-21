@@ -72,6 +72,12 @@ export * from './components/TextInput';
 export * from './components/Timeline';
 export * from './components/Toast';
 export * from './components/Tooltip';
+export * from './components/Menu';
+export * from './components/Drawer';
+export * from './components/Tabs';
+export * from './components/ToggleGroup';
+export * from './components/SpeedDial';
+export * from './components/Link';
 
 // Hooks
 export * from './hooks/useResponsive';
