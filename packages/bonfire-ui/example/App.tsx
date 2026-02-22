@@ -200,6 +200,10 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
             <PaletteChip name="Default" value="default" current={palette} onPress={setPalette} color="#FF3B6F" />
             <PaletteChip name="Ocean" value="ocean" current={palette} onPress={setPalette} color="#4A90FF" />
             <PaletteChip name="Lavender" value="lavender" current={palette} onPress={setPalette} color="#A855F7" />
+            <PaletteChip name="Sunset" value="sunset" current={palette} onPress={setPalette} color="#FF8C42" />
+            <PaletteChip name="Mint" value="mint" current={palette} onPress={setPalette} color="#34D399" />
+            <PaletteChip name="Rose" value="rose" current={palette} onPress={setPalette} color="#F472B6" />
+            <PaletteChip name="Midnight" value="midnight" current={palette} onPress={setPalette} color="#6366F1" />
           </HStack>
         </Section>
 

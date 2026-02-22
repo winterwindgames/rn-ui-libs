@@ -124,6 +124,98 @@ const lavenderLightColors: ThemeColors = {
   skeleton: '#E8DDF0', skeletonHighlight: '#F3EDF9',
 };
 
+// ── Sunset palette (Warm Orange) ───────────────────────────────────
+const sunsetDarkColors: ThemeColors = {
+  background: '#0F0A08', surface: '#1F1610', surfaceElevated: '#2D2118',
+  primary: '#FF8C42', primaryDark: '#D97230',
+  text: '#FFFFFF', textSecondary: '#A8947E', textMuted: '#6B5D4F', textInverse: '#0F0A08',
+  border: '#3A2D20', borderLight: '#2A2015',
+  error: '#FF4757', success: '#2ED573', warning: '#FFD93D', info: '#4ECDC4',
+  overlay: 'rgba(0,0,0,0.6)', card: '#1F1610', cardBorder: '#3A2D20',
+  inputBackground: '#1F1610', disabled: '#2A2015', disabledText: '#6B5D4F',
+  skeleton: '#2A2015', skeletonHighlight: '#3A2D20',
+};
+
+const sunsetLightColors: ThemeColors = {
+  background: '#FFF8F3', surface: '#FFFFFF', surfaceElevated: '#FFFFFF',
+  primary: '#FF8C42', primaryDark: '#D97230',
+  text: '#1F1610', textSecondary: '#7A6B5A', textMuted: '#A8947E', textInverse: '#FFFFFF',
+  border: '#F0E0D0', borderLight: '#F8F0E8',
+  error: '#FF4757', success: '#2ED573', warning: '#FFD93D', info: '#4ECDC4',
+  overlay: 'rgba(0,0,0,0.4)', card: '#FFFFFF', cardBorder: '#F0E0D0',
+  inputBackground: '#F8F0E8', disabled: '#F0E0D0', disabledText: '#A8947E',
+  skeleton: '#F0E0D0', skeletonHighlight: '#F8F0E8',
+};
+
+// ── Mint palette (Fresh Green) ─────────────────────────────────────
+const mintDarkColors: ThemeColors = {
+  background: '#080F0D', surface: '#101F1A', surfaceElevated: '#182E26',
+  primary: '#34D399', primaryDark: '#28B07E',
+  text: '#FFFFFF', textSecondary: '#88A89A', textMuted: '#506B5F', textInverse: '#080F0D',
+  border: '#1E3A2F', borderLight: '#152820',
+  error: '#FF4757', success: '#34D399', warning: '#FFA502', info: '#38BDF8',
+  overlay: 'rgba(0,0,0,0.6)', card: '#101F1A', cardBorder: '#1E3A2F',
+  inputBackground: '#101F1A', disabled: '#152820', disabledText: '#506B5F',
+  skeleton: '#152820', skeletonHighlight: '#1E3A2F',
+};
+
+const mintLightColors: ThemeColors = {
+  background: '#F3FDF8', surface: '#FFFFFF', surfaceElevated: '#FFFFFF',
+  primary: '#34D399', primaryDark: '#28B07E',
+  text: '#101F1A', textSecondary: '#5A7A6B', textMuted: '#88A89A', textInverse: '#FFFFFF',
+  border: '#D0F0E0', borderLight: '#E8F8F0',
+  error: '#FF4757', success: '#34D399', warning: '#FFA502', info: '#38BDF8',
+  overlay: 'rgba(0,0,0,0.4)', card: '#FFFFFF', cardBorder: '#D0F0E0',
+  inputBackground: '#E8F8F0', disabled: '#D0F0E0', disabledText: '#88A89A',
+  skeleton: '#D0F0E0', skeletonHighlight: '#E8F8F0',
+};
+
+// ── Rose palette (Soft Pink) ───────────────────────────────────────
+const roseDarkColors: ThemeColors = {
+  background: '#100A0D', surface: '#1F1418', surfaceElevated: '#2E1E24',
+  primary: '#F472B6', primaryDark: '#D05A9A',
+  text: '#FFFFFF', textSecondary: '#A88E98', textMuted: '#6B5560', textInverse: '#100A0D',
+  border: '#3A2530', borderLight: '#2A1A22',
+  error: '#FF4757', success: '#2ED573', warning: '#FFA502', info: '#818CF8',
+  overlay: 'rgba(0,0,0,0.6)', card: '#1F1418', cardBorder: '#3A2530',
+  inputBackground: '#1F1418', disabled: '#2A1A22', disabledText: '#6B5560',
+  skeleton: '#2A1A22', skeletonHighlight: '#3A2530',
+};
+
+const roseLightColors: ThemeColors = {
+  background: '#FFF5F9', surface: '#FFFFFF', surfaceElevated: '#FFFFFF',
+  primary: '#F472B6', primaryDark: '#D05A9A',
+  text: '#1F1418', textSecondary: '#7A5A68', textMuted: '#A88E98', textInverse: '#FFFFFF',
+  border: '#F0D8E4', borderLight: '#F8E8F0',
+  error: '#FF4757', success: '#2ED573', warning: '#FFA502', info: '#818CF8',
+  overlay: 'rgba(0,0,0,0.4)', card: '#FFFFFF', cardBorder: '#F0D8E4',
+  inputBackground: '#F8E8F0', disabled: '#F0D8E4', disabledText: '#A88E98',
+  skeleton: '#F0D8E4', skeletonHighlight: '#F8E8F0',
+};
+
+// ── Midnight palette (Deep Indigo) ─────────────────────────────────
+const midnightDarkColors: ThemeColors = {
+  background: '#08081A', surface: '#10102A', surfaceElevated: '#1A1A3A',
+  primary: '#6366F1', primaryDark: '#4F46E5',
+  text: '#FFFFFF', textSecondary: '#8888B0', textMuted: '#555578', textInverse: '#08081A',
+  border: '#252548', borderLight: '#1A1A35',
+  error: '#FF4757', success: '#2ED573', warning: '#FFA502', info: '#6366F1',
+  overlay: 'rgba(0,0,0,0.6)', card: '#10102A', cardBorder: '#252548',
+  inputBackground: '#10102A', disabled: '#1A1A35', disabledText: '#555578',
+  skeleton: '#1A1A35', skeletonHighlight: '#252548',
+};
+
+const midnightLightColors: ThemeColors = {
+  background: '#F5F5FF', surface: '#FFFFFF', surfaceElevated: '#FFFFFF',
+  primary: '#6366F1', primaryDark: '#4F46E5',
+  text: '#10102A', textSecondary: '#5555A0', textMuted: '#8888B0', textInverse: '#FFFFFF',
+  border: '#DDDDF0', borderLight: '#EEEEFC',
+  error: '#FF4757', success: '#2ED573', warning: '#FFA502', info: '#6366F1',
+  overlay: 'rgba(0,0,0,0.4)', card: '#FFFFFF', cardBorder: '#DDDDF0',
+  inputBackground: '#EEEEFC', disabled: '#DDDDF0', disabledText: '#8888B0',
+  skeleton: '#DDDDF0', skeletonHighlight: '#EEEEFC',
+};
+
 export const darkTheme: Theme = {
   colors: defaultDarkColors,
   spacing, radii, typography, shadows: darkShadows, sizes, isDark: true,
@@ -138,6 +230,10 @@ export const palettes: Record<PaletteName, { light: ThemeColors; dark: ThemeColo
   default: { light: defaultLightColors, dark: defaultDarkColors },
   ocean: { light: oceanLightColors, dark: oceanDarkColors },
   lavender: { light: lavenderLightColors, dark: lavenderDarkColors },
+  sunset: { light: sunsetLightColors, dark: sunsetDarkColors },
+  mint: { light: mintLightColors, dark: mintDarkColors },
+  rose: { light: roseLightColors, dark: roseDarkColors },
+  midnight: { light: midnightLightColors, dark: midnightDarkColors },
 };
 
 export function buildTheme(palette: PaletteName, scheme: 'light' | 'dark'): Theme {

@@ -103,7 +103,7 @@ export interface Theme {
   isDark: boolean;
 }
 
-export type PaletteName = 'default' | 'ocean' | 'lavender';
+export type PaletteName = 'default' | 'ocean' | 'lavender' | 'sunset' | 'mint' | 'rose' | 'midnight';
 
 export interface ThemeContextValue {
   theme: Theme;
