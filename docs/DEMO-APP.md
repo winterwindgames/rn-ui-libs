@@ -66,6 +66,7 @@ The demo app scrolls through these sections. Each section demonstrates related c
 - App title (library personality)
 - Subtitle/greeting text
 - **Dark mode toggle** (sun/moon icon, top right)
+- **Palette picker** — 3 tappable buttons/chips showing each palette name with a color dot preview
 - Status bar adapts to theme
 
 ### 2. Stats / Hero Cards

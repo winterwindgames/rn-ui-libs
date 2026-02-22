@@ -1,4 +1,4 @@
-import type { Theme, ThemeSpacing, ThemeRadii, ThemeTypography, ThemeShadows, ThemeSizes } from './types';
+import type { Theme, ThemeSpacing, ThemeRadii, ThemeTypography, ThemeShadows, ThemeSizes, ThemeColors, PaletteName } from './types';
 
 const spacing: ThemeSpacing = {
   xs: 4,
@@ -91,6 +91,52 @@ export const darkTheme: Theme = {
   isDark: true,
 };
 
+// ── Electric palette ────────────────────────────────────────────────
+const electricDarkColors: ThemeColors = {
+  background: '#080B12', surface: '#111827', surfaceElevated: '#1E293B',
+  primary: '#3B82F6', primaryDark: '#2563EB',
+  text: '#F8FAFC', textSecondary: '#94A3B8', textMuted: '#64748B', textInverse: '#080B12',
+  border: '#334155', borderLight: '#1E293B',
+  error: '#EF4444', success: '#22C55E', warning: '#F59E0B', info: '#06B6D4',
+  overlay: 'rgba(8,11,18,0.7)', card: '#111827', cardBorder: '#334155',
+  inputBackground: '#111827', disabled: '#1E293B', disabledText: '#475569',
+  skeleton: '#1E293B', skeletonHighlight: '#334155',
+};
+
+const electricLightColors: ThemeColors = {
+  background: '#F1F5F9', surface: '#FFFFFF', surfaceElevated: '#F8FAFC',
+  primary: '#2563EB', primaryDark: '#1D4ED8',
+  text: '#0F172A', textSecondary: '#64748B', textMuted: '#94A3B8', textInverse: '#FFFFFF',
+  border: '#CBD5E1', borderLight: '#E2E8F0',
+  error: '#DC2626', success: '#16A34A', warning: '#D97706', info: '#0891B2',
+  overlay: 'rgba(15,23,42,0.4)', card: '#FFFFFF', cardBorder: '#E2E8F0',
+  inputBackground: '#F8FAFC', disabled: '#E2E8F0', disabledText: '#94A3B8',
+  skeleton: '#E2E8F0', skeletonHighlight: '#F1F5F9',
+};
+
+// ── Ember palette ──────────────────────────────────────────────────
+const emberDarkColors: ThemeColors = {
+  background: '#0C0A09', surface: '#1C1917', surfaceElevated: '#292524',
+  primary: '#F97316', primaryDark: '#EA580C',
+  text: '#FAFAF9', textSecondary: '#A8A29E', textMuted: '#78716C', textInverse: '#0C0A09',
+  border: '#44403C', borderLight: '#292524',
+  error: '#EF4444', success: '#22C55E', warning: '#FBBF24', info: '#F97316',
+  overlay: 'rgba(12,10,9,0.7)', card: '#1C1917', cardBorder: '#44403C',
+  inputBackground: '#1C1917', disabled: '#292524', disabledText: '#57534E',
+  skeleton: '#292524', skeletonHighlight: '#44403C',
+};
+
+const emberLightColors: ThemeColors = {
+  background: '#FAFAF9', surface: '#FFFFFF', surfaceElevated: '#FFF7ED',
+  primary: '#EA580C', primaryDark: '#C2410C',
+  text: '#1C1917', textSecondary: '#78716C', textMuted: '#A8A29E', textInverse: '#FFFFFF',
+  border: '#E7E5E4', borderLight: '#F5F5F4',
+  error: '#DC2626', success: '#16A34A', warning: '#D97706', info: '#EA580C',
+  overlay: 'rgba(28,25,23,0.4)', card: '#FFFFFF', cardBorder: '#E7E5E4',
+  inputBackground: '#F5F5F4', disabled: '#E7E5E4', disabledText: '#A8A29E',
+  skeleton: '#E7E5E4', skeletonHighlight: '#F5F5F4',
+};
+
 export const lightTheme: Theme = {
   colors: {
     background: '#F5F5F7',
@@ -124,3 +170,23 @@ export const lightTheme: Theme = {
   sizes,
   isDark: false,
 };
+
+// ── Palettes map ───────────────────────────────────────────────────
+export const palettes: Record<PaletteName, { light: ThemeColors; dark: ThemeColors }> = {
+  default: { light: lightTheme.colors, dark: darkTheme.colors },
+  electric: { light: electricLightColors, dark: electricDarkColors },
+  ember: { light: emberLightColors, dark: emberDarkColors },
+};
+
+export function buildTheme(palette: PaletteName, scheme: 'light' | 'dark'): Theme {
+  const isDark = scheme === 'dark';
+  return {
+    colors: palettes[palette][scheme],
+    spacing,
+    radii,
+    typography,
+    shadows: isDark ? darkShadows : lightShadows,
+    sizes,
+    isDark,
+  };
+}

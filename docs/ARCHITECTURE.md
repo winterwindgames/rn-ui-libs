@@ -154,14 +154,17 @@ export type { ButtonProps, ButtonVariant, ButtonSize } from './Button.types';
 
 ```
 tokens.ts
-├── colors         → All color values (22+ keys)
-├── spacing        → xs(4) sm(8) md(16) lg(24) xl(32) xxl(48)
-├── radii          → sm md lg xl pill full
-├── typography     → h1-h6, body variants, caption, label, overline
-├── shadows        → sm md lg (platform-aware)
-├── sizes          → inputHeight, icon, avatar, buttonHeight, headerHeight, tabBarHeight
-└── isDark         → boolean flag
+├── palettes       → { default, palette2, palette3 }
+│   └── each has   → { light: ThemeColors, dark: ThemeColors }
+├── spacing        → xs(4) sm(8) md(16) lg(24) xl(32) xxl(48)  [shared]
+├── radii          → sm md lg xl pill full                       [shared]
+├── typography     → h1-h6, body variants, caption, label, overline [shared]
+├── shadows        → sm md lg (light/dark variants)              [per-scheme]
+├── sizes          → inputHeight, icon, avatar, buttonHeight     [shared]
+└── buildTheme()   → (palette, scheme) => complete Theme
 ```
+
+Colors change per palette. Everything else stays constant across palettes.
 
 ### Theme consumption
 
@@ -174,10 +177,11 @@ const { colors, spacing, radii, typography, shadows, sizes } = useTheme();
 
 ### ThemeProvider
 
-- Imports `darkTheme` and `lightTheme` from `tokens.ts` (single source of truth)
+- Uses `buildTheme(palette, scheme)` from `tokens.ts` to construct the active theme
 - Never define theme values inline in ThemeProvider
 - Supports `initialScheme: 'light' | 'dark' | 'system'`
-- Exposes `toggleTheme()` and `setColorScheme()` via context
+- Supports `initialPalette: PaletteName` (defaults to 'default')
+- Exposes `toggleTheme()`, `setColorScheme()`, `palette`, and `setPalette()` via context
 
 ---
 

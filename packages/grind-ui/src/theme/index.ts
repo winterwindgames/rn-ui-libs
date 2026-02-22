@@ -1,6 +1,6 @@
 export { ThemeProvider, ThemeContext } from './ThemeProvider';
 export { useTheme } from './useTheme';
-export { lightTheme, darkTheme } from './tokens';
+export { lightTheme, darkTheme, palettes, buildTheme } from './tokens';
 export type {
   Theme,
   ThemeColors,
@@ -13,4 +13,5 @@ export type {
   ThemeSizes,
   ThemeContextValue,
   ColorScheme,
+  PaletteName,
 } from './types';

@@ -1,8 +1,8 @@
 // Theme
 export { ThemeProvider } from './theme/ThemeProvider';
 export { useTheme } from './theme/useTheme';
-export { lightTheme, darkTheme } from './theme/tokens';
-export type { Theme, ThemeColors, ThemeTypography, ThemeSpacing, ThemeRadii, ThemeShadows } from './theme/types';
+export { lightTheme, darkTheme, palettes, buildTheme } from './theme/tokens';
+export type { Theme, ThemeColors, ThemeTypography, ThemeSpacing, ThemeRadii, ThemeShadows, PaletteName } from './theme/types';
 
 // Components
 export * from './components/Accordion';

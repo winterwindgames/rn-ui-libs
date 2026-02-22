@@ -101,9 +101,13 @@ export interface Theme {
   sizes: ThemeSizes;
 }
 
+export type PaletteName = 'default' | 'ocean' | 'sunset';
+
 export interface ThemeContextValue {
   theme: Theme;
   colorScheme: 'light' | 'dark';
+  palette: PaletteName;
   toggleTheme: () => void;
   setColorScheme: (scheme: ColorScheme) => void;
+  setPalette: (palette: PaletteName) => void;
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ScrollView, View, StyleSheet, StatusBar, Text as RNText } from 'react-native';
+import { ScrollView, View, StyleSheet, StatusBar, Text as RNText, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
@@ -58,6 +58,41 @@ import {
   SpeedDial,
   Link,
 } from '../src';
+import type { PaletteName } from '../src';
+
+// ─── Palette Chip ─────────────────────────────────────────────────────────────
+const PaletteChip: React.FC<{
+  name: string;
+  value: PaletteName;
+  current: PaletteName;
+  onPress: (p: PaletteName) => void;
+  color: string;
+}> = ({ name, value, current, onPress, color }) => {
+  const { theme } = useTheme();
+  const active = current === value;
+  return (
+    <TouchableOpacity
+      onPress={() => onPress(value)}
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        paddingHorizontal: 14,
+        paddingVertical: 8,
+        borderRadius: 100,
+        backgroundColor: active ? theme.colors.primary : theme.colors.surface,
+        borderWidth: 1.5,
+        borderColor: active ? theme.colors.primary : theme.colors.border,
+        gap: 6,
+      }}
+      activeOpacity={0.7}
+    >
+      <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: color }} />
+      <Text variant="label" style={{ color: active ? theme.colors.textInverse : theme.colors.text, fontSize: 12 }}>
+        {name}
+      </Text>
+    </TouchableOpacity>
+  );
+};
 
 // ─── Section Wrapper ──────────────────────────────────────────────────────────
 const Section: React.FC<{ title: string; children: React.ReactNode }> = ({
@@ -80,7 +115,7 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
   isDark,
   onToggleDark,
 }) => {
-  const { theme } = useTheme();
+  const { theme, palette, setPalette } = useTheme();
   const { show: showToast } = useToast();
 
   const [switchValue, setSwitchValue] = useState(false);
@@ -118,6 +153,17 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
+        {/* ── Palette Picker ─────────────────────────── */}
+        <Section title="Palette">
+          <HStack style={{ gap: 8, flexWrap: 'wrap' }}>
+            <PaletteChip name="Default" value="default" current={palette} onPress={setPalette} color="#787AF3" />
+            <PaletteChip name="Ocean" value="ocean" current={palette} onPress={setPalette} color="#22D1EE" />
+            <PaletteChip name="Sunset" value="sunset" current={palette} onPress={setPalette} color="#F472B6" />
+          </HStack>
+        </Section>
+
+        <Divider />
+
         {/* ── Buttons ────────────────────────────────── */}
         <Section title="Buttons">
           <HStack style={{ flexWrap: 'wrap', gap: 8 }}>

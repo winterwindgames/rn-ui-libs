@@ -123,9 +123,13 @@ export interface Theme {
   isDark: boolean;
 }
 
+export type PaletteName = 'default' | 'electric' | 'ember';
+
 export interface ThemeContextValue {
   theme: Theme;
   colorScheme: 'light' | 'dark';
-  setColorScheme: (scheme: ColorScheme) => void;
+  palette: PaletteName;
   toggleTheme: () => void;
+  setColorScheme: (scheme: ColorScheme) => void;
+  setPalette: (palette: PaletteName) => void;
 }

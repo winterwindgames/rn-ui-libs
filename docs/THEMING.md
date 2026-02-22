@@ -4,6 +4,80 @@ How to design the visual identity for a new library. The theme is the **first th
 
 ---
 
+## Palette System
+
+Every library ships with **3 color palettes**, each with light and dark variants. Users can switch palettes at runtime via the ThemeProvider.
+
+```tsx
+// Set initial palette
+<ThemeProvider initialScheme="dark" initialPalette="ocean">
+  <App />
+</ThemeProvider>
+
+// Switch at runtime
+const { palette, setPalette } = useTheme();
+setPalette('sunset');
+```
+
+### Palette Structure in tokens.ts
+
+```typescript
+// Each palette provides light and dark color sets
+export const palettes = {
+  default: { light: ThemeColors, dark: ThemeColors },
+  ocean:   { light: ThemeColors, dark: ThemeColors },
+  sunset:  { light: ThemeColors, dark: ThemeColors },
+};
+
+// Build a complete theme from palette + scheme
+export function buildTheme(palette: PaletteName, scheme: 'light' | 'dark'): Theme;
+```
+
+Only **colors and shadows** change between palettes. Spacing, radii, typography, and sizes stay constant — they define the library's structural personality, while palettes define its color personality.
+
+### Designing Palettes
+
+Each library needs 3 palettes with distinct visual identities:
+
+1. **Default** — The signature palette (defined during initial library creation)
+2. **Palette 2** — A contrasting mood (e.g., cool vs warm, minimal vs vibrant)
+3. **Palette 3** — Another distinct option (e.g., professional, playful, dark)
+
+Rules:
+- Every palette must work in both light AND dark modes
+- Primary color must have sufficient contrast on both background colors
+- Semantic colors (error/success/warning/info) can vary per palette but must remain recognizable
+- Each palette should feel like a cohesive design, not just recolored
+
+### ThemeProvider API
+
+```typescript
+interface ThemeProviderProps {
+  children: React.ReactNode;
+  initialScheme?: ColorScheme;        // 'light' | 'dark' | 'system'
+  initialPalette?: PaletteName;       // library-specific palette names
+}
+```
+
+### ThemeContextValue
+
+```typescript
+interface ThemeContextValue {
+  theme: Theme;
+  colorScheme: 'light' | 'dark';
+  palette: PaletteName;
+  toggleTheme: () => void;
+  setColorScheme: (scheme: ColorScheme) => void;
+  setPalette: (palette: PaletteName) => void;
+}
+```
+
+### Demo App Palette Picker
+
+Every demo app must include a palette picker section near the top, showing all available palettes as tappable buttons with a color preview dot.
+
+---
+
 ## Theme Token Structure
 
 Every library has exactly this token shape (defined in `src/theme/types.ts`):

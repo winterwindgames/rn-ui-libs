@@ -67,8 +67,14 @@ function Section({ children }: { children: React.ReactNode }) {
 }
 
 // ─── Main Content ───────────────────────────────────────────────────
+const PALETTE_OPTIONS = [
+  { name: 'default' as const, label: 'Default', dot: '#C8FF00' },
+  { name: 'electric' as const, label: 'Electric', dot: '#3B82F6' },
+  { name: 'ember' as const, label: 'Ember', dot: '#F97316' },
+];
+
 function ShowcaseContent() {
-  const { theme, colorScheme, toggleTheme } = useTheme();
+  const { theme, colorScheme, toggleTheme, palette, setPalette } = useTheme();
   const toast = useToast();
 
   const [switchOn, setSwitchOn] = useState(true);
@@ -145,6 +151,53 @@ function ShowcaseContent() {
           >
             Let's crush your goals today
           </Text>
+        </Section>
+
+        {/* ── Palette Picker ──────────────────────────────────── */}
+        <Section>
+          <SectionTitle>Color Palette</SectionTitle>
+          <View style={{ flexDirection: 'row', gap: 10 }}>
+            {PALETTE_OPTIONS.map((p) => (
+              <Pressable
+                key={p.name}
+                onPress={() => setPalette(p.name)}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 8,
+                  paddingVertical: 10,
+                  paddingHorizontal: 16,
+                  borderRadius: theme.radii.md,
+                  backgroundColor:
+                    palette === p.name ? theme.colors.surface : 'transparent',
+                  borderWidth: 1,
+                  borderColor:
+                    palette === p.name ? theme.colors.primary : theme.colors.border,
+                }}
+              >
+                <View
+                  style={{
+                    width: 14,
+                    height: 14,
+                    borderRadius: 7,
+                    backgroundColor: p.dot,
+                  }}
+                />
+                <Text
+                  style={{
+                    color:
+                      palette === p.name
+                        ? theme.colors.text
+                        : theme.colors.textSecondary,
+                    ...theme.typography.bodySm,
+                    fontWeight: palette === p.name ? '600' : '400',
+                  }}
+                >
+                  {p.label}
+                </Text>
+              </Pressable>
+            ))}
+          </View>
         </Section>
 
         <Divider />
