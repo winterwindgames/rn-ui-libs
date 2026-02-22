@@ -1,14 +1,10 @@
 {
   "expo": {
-    "name": "bonfire-ui-demo",
+    "name": "Bonfire UI Demo",
     "slug": "bonfire-ui-demo",
     "version": "1.0.0",
     "orientation": "portrait",
-    "scheme": "bonfire-ui-demo",
-    "userInterfaceStyle": "dark",
     "platforms": ["ios", "android"],
-    "ios": { "supportsTablet": true },
-    "android": { "adaptiveIcon": { "backgroundColor": "#0D0D0F" } },
-    "web": { "bundler": "metro", "output": "static" }
+    "sdkVersion": "54.0.0"
   }
 }

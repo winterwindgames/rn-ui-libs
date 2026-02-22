@@ -47,3 +47,10 @@ export const Accordion: React.FC<AccordionProps> = ({ children, style, testID })
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+});

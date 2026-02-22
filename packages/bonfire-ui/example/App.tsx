@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import { ScrollView, View, StyleSheet, StatusBar, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {
   ThemeProvider,
   useTheme,
   PortalProvider,
-  ToastProvider,
-  useToast,
   // Primitives
   Box,
   Container,
@@ -77,6 +74,7 @@ import {
   Tabs,
   ToggleGroup,
   SpeedDial,
+  Toast,
 } from '../src';
 import type { PaletteName } from '../src';
 
@@ -136,7 +134,14 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
   onToggleDark,
 }) => {
   const { theme, palette, setPalette } = useTheme();
-  const { show: showToast } = useToast();
+  const [toastMsg, setToastMsg] = useState('');
+  const [toastVariant, setToastVariant] = useState<'success' | 'error' | 'warning' | 'info'>('info');
+  const [toastVisible, setToastVisible] = useState(false);
+  const showToast = ({ message, variant }: { message: string; variant: 'success' | 'error' | 'warning' | 'info' }) => {
+    setToastMsg(message);
+    setToastVariant(variant);
+    setToastVisible(true);
+  };
 
   const [switchValue, setSwitchValue] = useState(false);
   const [checkboxValue, setCheckboxValue] = useState(false);
@@ -635,10 +640,9 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
         {/* ── Toggle Group ────────────────────────────── */}
         <Section title="Toggle Group">
           <ToggleGroup
-            type="single"
             value={toggleValue}
-            onValueChange={(v) => setToggleValue(v as string)}
-            items={[
+            onChange={(v) => setToggleValue(v)}
+            options={[
               { value: 'daily', label: 'Daily' },
               { value: 'weekly', label: 'Weekly' },
               { value: 'monthly', label: 'Monthly' },
@@ -764,6 +768,12 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
           { icon: <Ionicons name="flame" size={18} color="#fff" />, label: 'Bonfire', onPress: () => { setSpeedDialOpen(false); showToast({ message: 'New bonfire! 🔥', variant: 'success' }); } },
         ]}
       />
+      <Toast
+        visible={toastVisible}
+        message={toastMsg}
+        variant={toastVariant}
+        onDismiss={() => setToastVisible(false)}
+      />
     </SafeAreaBox>
   );
 };
@@ -771,15 +781,11 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
 // ─── Root App ─────────────────────────────────────────────────────────────────
 export default function App() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider initialScheme="dark">
-        <PortalProvider>
-          <ToastProvider>
-            <DemoContentWrapper />
-          </ToastProvider>
-        </PortalProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <ThemeProvider initialScheme="dark">
+      <PortalProvider>
+        <DemoContentWrapper />
+      </PortalProvider>
+    </ThemeProvider>
   );
 }
 
