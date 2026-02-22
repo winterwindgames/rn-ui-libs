@@ -180,6 +180,11 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
           </HStack>
           <Spacer size="md" />
           <HStack style={{ gap: 8 }}>
+            <Button label="Elevated" variant="elevated" onPress={() => {}} />
+            <Button label="Destructive" variant="destructive" onPress={() => {}} />
+          </HStack>
+          <Spacer size="md" />
+          <HStack style={{ flexWrap: 'wrap', gap: 8 }}>
             <Button label="Secondary" color="secondary" onPress={() => {}} />
             <Button label="Disabled" disabled onPress={() => {}} />
             <Button label="Loading" loading onPress={() => {}} />

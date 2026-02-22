@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ViewStyle, TextStyle } from 'react-native';
 
-export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'link';
+export type ButtonVariant = 'solid' | 'outline' | 'ghost' | 'link' | 'soft' | 'elevated' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps {

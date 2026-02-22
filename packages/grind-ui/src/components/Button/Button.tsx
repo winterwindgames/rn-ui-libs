@@ -56,9 +56,13 @@ export const Button: React.FC<ButtonProps> = ({
     scale.value = withSpring(1, { damping: 15, stiffness: 300 });
   }, [scale]);
 
+  const errorColor = colors.error ?? '#E5534B';
+
   const getBackgroundColor = (): string => {
-    if (isDisabled && variant === 'solid') return colors.surfaceElevated ?? '#3a3a3a';
-    if (variant === 'solid') return resolvedColor;
+    if (isDisabled && (variant === 'solid' || variant === 'elevated')) return colors.surfaceElevated ?? '#3a3a3a';
+    if (variant === 'solid' || variant === 'elevated') return resolvedColor;
+    if (variant === 'destructive') return errorColor;
+    if (variant === 'soft') return resolvedColor + '1A';
     if (variant === 'outline' || variant === 'ghost' || variant === 'link') return 'transparent';
     return resolvedColor;
   };
@@ -73,13 +77,28 @@ export const Button: React.FC<ButtonProps> = ({
     return {};
   };
 
+  const getShadowStyle = () => {
+    if (variant === 'elevated' && !isDisabled) {
+      const shadows = (colors as any).__shadows;
+      return {
+        shadowColor: resolvedColor,
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.3,
+        shadowRadius: 8,
+        elevation: 4,
+      };
+    }
+    return {};
+  };
+
   const getTextColor = (): string => {
     if (isDisabled) return colors.textSecondary ?? '#888';
-    if (variant === 'solid') return colors.textInverse ?? '#F8FBFC';
+    if (variant === 'solid' || variant === 'elevated' || variant === 'destructive') return colors.textInverse ?? '#F8FBFC';
+    if (variant === 'soft') return resolvedColor;
     return resolvedColor;
   };
 
-  const shouldUppercase = variant === 'solid' || variant === 'outline';
+  const shouldUppercase = variant === 'solid' || variant === 'outline' || variant === 'elevated' || variant === 'destructive';
 
   return (
     <AnimatedPressable
@@ -100,6 +119,7 @@ export const Button: React.FC<ButtonProps> = ({
           opacity: isDisabled ? 0.5 : 1,
         },
         getBorderStyle(),
+        getShadowStyle(),
         fullWidth && styles.fullWidth,
         variant === 'link' && styles.link,
         animatedStyle,

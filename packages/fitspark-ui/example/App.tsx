@@ -254,6 +254,12 @@ function ShowcaseContent() {
             <Button variant="ghost" onPress={() => {}}>
               Skip Today
             </Button>
+            <Button variant="elevated" onPress={() => {}}>
+              Elevated
+            </Button>
+            <Button variant="destructive" onPress={() => {}}>
+              Delete Workout
+            </Button>
             <Button variant="solid" loading onPress={() => {}}>
               Loading…
             </Button>

@@ -27,11 +27,22 @@ export const Button: React.FC<ButtonProps> = ({
   const px = size === 'sm' ? spacing.md : size === 'md' ? spacing.lg : spacing.xl;
   const fontSize = size === 'sm' ? 13 : size === 'md' ? 15 : 17;
 
+  const errorColor = colors.error ?? '#FF453A';
+
   const containerStyles: Record<ButtonVariant, ViewStyle> = {
     solid: { backgroundColor: colors.primary },
     outline: { backgroundColor: 'transparent', borderWidth: 1.5, borderColor: colors.primary },
     ghost: { backgroundColor: 'transparent' },
     link: { backgroundColor: 'transparent' },
+    elevated: {
+      backgroundColor: colors.primary,
+      shadowColor: colors.primary,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.4,
+      shadowRadius: 10,
+      elevation: 5,
+    },
+    destructive: { backgroundColor: errorColor },
   };
 
   const textColors: Record<ButtonVariant, string> = {
@@ -39,6 +50,8 @@ export const Button: React.FC<ButtonProps> = ({
     outline: colors.primary,
     ghost: colors.primary,
     link: colors.primary,
+    elevated: colors.textInverse,
+    destructive: '#FFFFFF',
   };
 
   const btnStyle: ViewStyle = {
