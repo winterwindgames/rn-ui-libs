@@ -15,7 +15,7 @@ export const GradientBox: React.FC<GradientBoxProps> = ({
 }) => {
   const { colors } = useTheme();
 
-  const resolvedColors = gradientColors ?? [colors.accent, colors.surface];
+  const resolvedColors = gradientColors ?? [colors.primary, colors.surface];
 
   return (
     <LinearGradient

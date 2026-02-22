@@ -3,14 +3,6 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useTheme } from '../../theme/useTheme';
 import { BadgeProps, BadgeColor } from './Badge.types';
 
-const COLOR_MAP: Record<BadgeColor, string> = {
-  accent: '#C8FF00',
-  error: '#FF3B30',
-  warning: '#FF9500',
-  info: '#007AFF',
-  default: '#8E8E93',
-};
-
 export const Badge: React.FC<BadgeProps> = ({
   label,
   variant = 'solid',
@@ -23,7 +15,16 @@ export const Badge: React.FC<BadgeProps> = ({
   testID,
 }) => {
   const { colors } = useTheme();
-  const badgeColor = COLOR_MAP[color] || colors.accent || '#C8FF00';
+
+  const colorMap: Record<BadgeColor, string> = {
+    accent: colors.primary,
+    error: colors.error,
+    warning: colors.warning,
+    info: colors.info,
+    default: colors.textMuted ?? '#8E8E93',
+  };
+
+  const badgeColor = colorMap[color] ?? colors.primary;
   const displayText = label ?? (count !== undefined ? (count > maxCount ? `${maxCount}+` : `${count}`) : undefined);
 
   if (!visible) return children ? <>{children}</> : null;
@@ -52,7 +53,7 @@ export const Badge: React.FC<BadgeProps> = ({
             styles.text,
             {
               color: variant === 'solid'
-                ? (color === 'accent' ? '#0D0D0D' : '#FFFFFF')
+                ? colors.textInverse
                 : badgeColor,
             },
           ]}

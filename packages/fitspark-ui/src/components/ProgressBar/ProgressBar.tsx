@@ -21,7 +21,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   testID,
 }) => {
   const { colors, radii } = useTheme();
-  const barColor = color || colors.accent || '#C8FF00';
+  const barColor = color || colors.primary || '#C8FF00';
   const bgColor = trackColor || colors.surfaceSecondary || '#2A2A2A';
   const animatedProgress = useSharedValue(0);
   const indeterminateX = useSharedValue(-0.5);

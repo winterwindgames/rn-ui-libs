@@ -9,7 +9,7 @@ export const Timeline: React.FC<TimelineProps> = ({ items, style, testID }) => {
   return (
     <View style={style} testID={testID} accessibilityRole="list">
       {items.map((item, i) => {
-        const dotColor = item.color || colors.accent || '#C8FF00';
+        const dotColor = item.color || colors.primary || '#C8FF00';
         const isLast = i === items.length - 1;
 
         return (

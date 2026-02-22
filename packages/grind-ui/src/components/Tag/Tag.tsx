@@ -5,7 +5,7 @@ import { TagProps } from './Tag.types';
 
 export const Tag: React.FC<TagProps> = ({
   label,
-  variant = 'solid',
+  variant: rawVariant = 'solid',
   color,
   leftIcon,
   onRemove,
@@ -15,7 +15,16 @@ export const Tag: React.FC<TagProps> = ({
 }) => {
   const { colors, spacing, radii } = useTheme();
 
-  const tagColor = color ?? colors.primary;
+  // Support 'soft' as alias for 'subtle'
+  const variant = rawVariant === 'soft' ? 'subtle' : rawVariant;
+
+  // Resolve named theme colors (e.g. "primary", "secondary", "success", "accent")
+  const resolveColor = (c?: string): string => {
+    if (!c) return colors.primary;
+    if (c in colors) return (colors as any)[c];
+    return c;
+  };
+  const tagColor = resolveColor(color);
   const isSm = size === 'sm';
   const height = isSm ? 24 : 32;
   const fontSize = isSm ? 11 : 13;

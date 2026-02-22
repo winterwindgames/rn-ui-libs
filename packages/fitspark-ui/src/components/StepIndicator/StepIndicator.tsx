@@ -89,7 +89,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
                 <StepCircle
                   index={index}
                   status={status}
-                  accentColor={colors.accent}
+                  accentColor={colors.primary}
                   surfaceColor={colors.surfaceHighlight}
                   textColor={colors.text}
                   mutedColor={colors.textMuted}
@@ -115,7 +115,7 @@ export const StepIndicator: React.FC<StepIndicatorProps> = ({
               {index < steps.length - 1 && (
                 <ConnectorLine
                   completed={index < currentStep}
-                  accentColor={colors.accent}
+                  accentColor={colors.primary}
                   mutedColor={colors.border}
                 />
               )}

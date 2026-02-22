@@ -19,7 +19,7 @@ export const ProgressCircle: React.FC<ProgressCircleProps> = ({
   testID,
 }) => {
   const { colors } = useTheme();
-  const barColor = color || colors.accent || '#C8FF00';
+  const barColor = color || colors.primary || '#C8FF00';
   const bgColor = trackColor || colors.surfaceSecondary || '#2A2A2A';
   const halfSize = size / 2;
 

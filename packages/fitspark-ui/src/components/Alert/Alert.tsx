@@ -64,7 +64,7 @@ export const Alert: React.FC<AlertProps> = ({
                         ? 'transparent'
                         : action.variant === 'destructive'
                           ? '#FF3B30'
-                          : (colors.accent || '#C8FF00'),
+                          : (colors.primary || '#C8FF00'),
                       borderRadius: radii?.md || 8,
                       opacity: pressed ? 0.7 : 1,
                     },

@@ -16,12 +16,12 @@ export const Tag: React.FC<TagProps> = ({
   testID,
 }) => {
   const { colors } = useTheme();
-  const tagColor = useAccent ? (colors.accent || '#C8FF00') : (color || colors.textSecondary || '#8E8E93');
+  const tagColor = useAccent ? (colors.primary ?? '#C8FF00') : (color || (colors.textSecondary ?? '#8E8E93'));
 
   const variantStyles: Record<string, any> = {
     solid: {
       container: { backgroundColor: tagColor },
-      text: { color: useAccent ? '#0D0D0D' : '#FFFFFF' },
+      text: { color: useAccent ? colors.textInverse ?? '#0D0D0D' : '#FFFFFF' },
     },
     outline: {
       container: { backgroundColor: 'transparent', borderWidth: 1, borderColor: tagColor },

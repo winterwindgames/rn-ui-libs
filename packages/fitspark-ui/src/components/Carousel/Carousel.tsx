@@ -68,7 +68,7 @@ export const Carousel: React.FC<CarouselProps> = ({
             <PaginationDot
               key={i}
               active={i === activeIndex}
-              accentColor={colors.accent}
+              accentColor={colors.primary}
               mutedColor={colors.textMuted}
             />
           ))}

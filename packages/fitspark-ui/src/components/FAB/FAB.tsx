@@ -59,7 +59,7 @@ export const FAB: React.FC<FABProps> = ({
       style={[
         styles.container,
         {
-          backgroundColor: disabled ? colors.textMuted : colors.accent,
+          backgroundColor: disabled ? colors.textMuted : colors.primary,
           width: label ? undefined : dimension,
           height: dimension,
           borderRadius: label ? dimension / 2 : dimension / 2,

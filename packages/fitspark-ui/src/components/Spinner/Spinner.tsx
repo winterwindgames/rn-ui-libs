@@ -20,7 +20,7 @@ export const Spinner: React.FC<SpinnerProps> = ({
   testID,
 }) => {
   const { colors } = useTheme();
-  const spinColor = color || colors.accent || '#C8FF00';
+  const spinColor = color || colors.primary || '#C8FF00';
   const dim = SIZE_MAP[size];
   const stroke = STROKE_MAP[size];
   const rotation = useSharedValue(0);

@@ -101,7 +101,7 @@ export const ActionSheet: React.FC<ActionSheetProps> = ({
             ]}
             accessibilityRole="button"
           >
-            <Text style={[styles.cancelText, { color: colors.accent || '#C8FF00' }]}>{cancelLabel}</Text>
+            <Text style={[styles.cancelText, { color: colors.primary || '#C8FF00' }]}>{cancelLabel}</Text>
           </Pressable>
         </Animated.View>
       </View>

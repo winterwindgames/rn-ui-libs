@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ViewStyle, StyleProp } from 'react-native';
 
-export type TagVariant = 'solid' | 'outline' | 'subtle';
+export type TagVariant = 'solid' | 'outline' | 'subtle' | 'soft';
 export type TagSize = 'sm' | 'md';
 
 export interface TagProps {

@@ -29,9 +29,9 @@ export const Avatar: React.FC<AvatarProps> = ({
   const showImage = imgSource && !imgError;
 
   const statusColors: Record<string, string> = {
-    active: colors.accent || '#C8FF00',
-    inactive: colors.textSecondary || '#8E8E93',
-    away: '#FF9500',
+    active: colors.primary ?? colors.success ?? '#30D158',
+    inactive: colors.textSecondary ?? '#8E8E93',
+    away: colors.warning ?? '#FF9500',
   };
 
   return (
@@ -55,7 +55,7 @@ export const Avatar: React.FC<AvatarProps> = ({
               width: dim,
               height: dim,
               borderRadius: dim / 2,
-              backgroundColor: colors.surfaceSecondary || '#2A2A2A',
+              backgroundColor: colors.surfaceElevated ?? '#2A2A2A',
             },
           ]}
         >

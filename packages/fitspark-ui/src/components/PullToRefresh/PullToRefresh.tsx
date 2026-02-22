@@ -32,8 +32,8 @@ export const PullToRefresh: React.FC<PullToRefreshProps> = ({
         <RefreshControl
           refreshing={isRefreshing}
           onRefresh={handleRefresh}
-          tintColor={colors.accent}
-          colors={[colors.accent]}
+          tintColor={colors.primary}
+          colors={[colors.primary]}
           progressBackgroundColor={colors.surface}
         />
       }

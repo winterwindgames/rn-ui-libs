@@ -62,7 +62,7 @@ export const Pagination: React.FC<PaginationProps> = ({
           active={i === activeIndex}
           size={dotSize}
           activeWidth={activeDotWidth}
-          accentColor={colors.accent}
+          accentColor={colors.primary}
           mutedColor={colors.textMuted}
           onPress={onDotPress ? () => onDotPress(i) : undefined}
           testID={`${testID}-dot-${i}`}

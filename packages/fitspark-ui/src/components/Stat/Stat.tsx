@@ -40,7 +40,7 @@ export const Stat: React.FC<StatProps> = ({
           <Text
             style={[
               styles.changeText,
-              { color: isPositive ? (colors.accent || '#C8FF00') : '#FF3B30' },
+              { color: isPositive ? (colors.primary || '#C8FF00') : '#FF3B30' },
             ]}
           >
             {isPositive ? '↑' : '↓'} {Math.abs(change)}%
