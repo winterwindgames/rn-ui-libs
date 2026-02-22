@@ -675,10 +675,10 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
         <Section title="Tab Bar">
           <TabBar
             tabs={[
-              { label: 'Home', icon: <Ionicons name="home" size={20} /> },
-              { label: 'Friends', icon: <Ionicons name="people" size={20} /> },
-              { label: 'Chat', icon: <Ionicons name="chatbubbles" size={20} /> },
-              { label: 'Profile', icon: <Ionicons name="person" size={20} /> },
+              { label: 'Home', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="home" size={size} color={color} /> },
+              { label: 'Friends', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="people" size={size} color={color} /> },
+              { label: 'Chat', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="chatbubbles" size={size} color={color} /> },
+              { label: 'Profile', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="person" size={size} color={color} /> },
             ]}
             activeIndex={tabIndex}
             onChange={setTabIndex}
@@ -772,6 +772,20 @@ const DemoContent: React.FC<{ isDark: boolean; onToggleDark: () => void }> = ({
           { icon: <Ionicons name="flame" size={18} color="#fff" />, label: 'Bonfire', onPress: () => { setSpeedDialOpen(false); showToast({ message: 'New bonfire! 🔥', variant: 'success' }); } },
         ]}
       />
+      {/* ── Fixed Bottom TabBar ──────────────────── */}
+      <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0 }}>
+        <TabBar
+          tabs={[
+            { label: 'Home', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="home" size={size} color={color} /> },
+            { label: 'Friends', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="people" size={size} color={color} /> },
+            { label: 'Chat', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="chatbubbles" size={size} color={color} /> },
+            { label: 'Profile', icon: ({ color, size }: { color: string; size: number }) => <Ionicons name="person" size={size} color={color} /> },
+          ]}
+          activeIndex={tabIndex}
+          onChange={setTabIndex}
+        />
+      </View>
+
       <Toast
         visible={toastVisible}
         message={toastMsg}
