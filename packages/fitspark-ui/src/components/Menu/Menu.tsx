@@ -1,14 +1,13 @@
-import React, { useCallback } from 'react';
-import { Pressable, StyleSheet, View, type ViewStyle } from 'react-native';
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-  runOnJS,
-} from 'react-native-reanimated';
+import React, { useCallback, useRef, useState } from 'react';
+import {
+  Pressable,
+  Text,
+  View,
+  StyleSheet,
+  Modal,
+} from 'react-native';
 import { useTheme } from '../../theme/useTheme';
-import { Portal } from '../Portal';
-import type { MenuProps, MenuItem } from './Menu.types';
+import type { MenuProps } from './Menu.types';
 
 export const Menu: React.FC<MenuProps> = ({
   trigger,
@@ -19,103 +18,105 @@ export const Menu: React.FC<MenuProps> = ({
   style,
   testID,
 }) => {
-  const { colors, spacing, radii, shadows } = useTheme();
-  const scale = useSharedValue(visible ? 1 : 0);
-  const opacity = useSharedValue(visible ? 1 : 0);
+  const { colors, spacing, radii, typography, shadows } = useTheme();
+  const triggerRef = useRef<View>(null);
+  const [menuPos, setMenuPos] = useState({ x: 0, y: 0 });
+
+  const handleOpen = useCallback(() => {
+    triggerRef.current?.measureInWindow((x, y, width, height) => {
+      setMenuPos({ x, y: y + height + 4 });
+    });
+  }, []);
 
   React.useEffect(() => {
-    scale.value = withTiming(visible ? 1 : 0, { duration: 200 });
-    opacity.value = withTiming(visible ? 1 : 0, { duration: 200 });
-  }, [visible]);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-    transform: [{ scale: 0.85 + scale.value * 0.15 }],
-  }));
-
-  const menuStyle: ViewStyle = {
-    backgroundColor: colors.surfaceElevated ?? colors.surface,
-    borderRadius: radii.md ?? 12,
-    paddingVertical: spacing.xs ?? 4,
-    minWidth: 180,
-    ...(shadows?.md ?? {}),
-    borderWidth: 1,
-    borderColor: colors.cardBorder ?? colors.border,
-  };
-
-  const renderItem = useCallback(
-    (item: MenuItem, index: number) => {
-      const itemColor = item.destructive
-        ? colors.error
-        : item.disabled
-        ? colors.disabledText ?? colors.textMuted
-        : colors.text;
-
-      return (
-        <Pressable
-          key={index}
-          onPress={() => {
-            if (!item.disabled) {
-              item.onPress?.();
-              onClose();
-            }
-          }}
-          disabled={item.disabled}
-          accessibilityRole="menuitem"
-          accessibilityLabel={item.label}
-          accessibilityState={{ disabled: item.disabled ?? false }}
-          style={({ pressed }) => [
-            styles.item,
-            {
-              paddingHorizontal: spacing.md ?? 16,
-              paddingVertical: spacing.sm ?? 8,
-              backgroundColor: pressed ? (colors.overlay ?? 'rgba(255,255,255,0.05)') : 'transparent',
-              opacity: item.disabled ? 0.5 : 1,
-            },
-          ]}
-        >
-          {item.icon && <View style={{ marginRight: spacing.sm ?? 8 }}>{item.icon}</View>}
-          <Animated.Text style={{ color: itemColor, fontSize: 15, fontWeight: '500' }}>
-            {item.label}
-          </Animated.Text>
-        </Pressable>
-      );
-    },
-    [colors, spacing, onClose],
-  );
+    if (visible) handleOpen();
+  }, [visible, handleOpen]);
 
   return (
     <View testID={testID} style={style}>
-      {trigger}
-      {visible && (
-        <Portal>
-          <Pressable style={StyleSheet.absoluteFill} onPress={onClose} />
-          <Animated.View
-            style={[
-              menuStyle,
-              styles.menuContainer,
-              animatedStyle,
-              placement.includes('right') && { right: spacing.md ?? 16 },
-              placement.includes('left') && { left: spacing.md ?? 16 },
-              placement.includes('top') && { top: spacing.xl ?? 32 },
-              placement.includes('bottom') && { top: 100 },
-            ]}
-            accessibilityRole="menu"
-          >
-            {items.map(renderItem)}
-          </Animated.View>
-        </Portal>
-      )}
+      <View ref={triggerRef} collapsable={false}>
+        {trigger}
+      </View>
+      <Modal
+        visible={visible}
+        transparent
+        animationType="fade"
+        onRequestClose={onClose}
+      >
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={onClose}
+        />
+        <View
+          style={[
+            styles.menu,
+            {
+              top: menuPos.y,
+              left: menuPos.x,
+              backgroundColor: colors.surfaceElevated ?? '#2A2A2A',
+              borderRadius: radii.md ?? 12,
+              borderColor: colors.border ?? '#333',
+              borderWidth: 1,
+              ...(shadows.md ?? {}),
+            },
+          ]}
+        >
+          {items.map((item, index) => (
+            <Pressable
+              key={`${item.label}-${index}`}
+              onPress={() => {
+                if (!item.disabled) item.onPress();
+              }}
+              accessibilityRole="menuitem"
+              accessibilityLabel={item.label}
+              accessibilityState={{ disabled: item.disabled ?? false }}
+              style={({ pressed }) => [
+                styles.menuItem,
+                {
+                  paddingHorizontal: spacing.md ?? 16,
+                  paddingVertical: 12,
+                  opacity: item.disabled ? 0.4 : pressed ? 0.7 : 1,
+                  backgroundColor: pressed && !item.disabled
+                    ? (colors.surface ?? '#1C1C1E')
+                    : 'transparent',
+                },
+                index < items.length - 1 && {
+                  borderBottomWidth: StyleSheet.hairlineWidth,
+                  borderBottomColor: colors.border ?? '#333',
+                },
+              ]}
+            >
+              {item.icon && (
+                <View style={{ marginRight: spacing.sm ?? 8 }}>
+                  {item.icon}
+                </View>
+              )}
+              <Text
+                style={{
+                  ...(typography.body ?? { fontSize: 15 }),
+                  color: item.destructive
+                    ? (colors.error ?? '#FF453A')
+                    : (colors.text ?? '#FFFFFF'),
+                }}
+                numberOfLines={1}
+              >
+                {item.label}
+              </Text>
+            </Pressable>
+          ))}
+        </View>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  menuContainer: {
+  menu: {
     position: 'absolute',
-    zIndex: 999,
+    minWidth: 200,
+    overflow: 'hidden',
   },
-  item: {
+  menuItem: {
     flexDirection: 'row',
     alignItems: 'center',
   },
