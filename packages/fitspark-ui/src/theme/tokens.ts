@@ -137,6 +137,29 @@ const emberLightColors: ThemeColors = {
   skeleton: '#E7E5E4', skeletonHighlight: '#F5F5F4',
 };
 
+// ── Emerald palette ────────────────────────────────────────────────
+const emeraldDarkColors: ThemeColors = {
+  background: '#0a0a0a', surface: '#171717', surfaceElevated: '#262626',
+  primary: '#10B981', primaryDark: '#059669',
+  text: '#FAFAFA', textSecondary: '#A1A1AA', textMuted: '#71717A', textInverse: '#0a0a0a',
+  border: '#3F3F46', borderLight: '#27272A',
+  error: '#EF4444', success: '#10B981', warning: '#FBBF24', info: '#10B981',
+  overlay: 'rgba(10,10,10,0.7)', card: '#171717', cardBorder: '#3F3F46',
+  inputBackground: '#171717', disabled: '#262626', disabledText: '#52525B',
+  skeleton: '#262626', skeletonHighlight: '#3F3F46',
+};
+
+const emeraldLightColors: ThemeColors = {
+  background: '#FAFAFA', surface: '#FFFFFF', surfaceElevated: '#ECFDF5',
+  primary: '#059669', primaryDark: '#047857',
+  text: '#18181B', textSecondary: '#71717A', textMuted: '#A1A1AA', textInverse: '#FFFFFF',
+  border: '#E4E4E7', borderLight: '#F4F4F5',
+  error: '#DC2626', success: '#059669', warning: '#D97706', info: '#059669',
+  overlay: 'rgba(24,24,27,0.4)', card: '#FFFFFF', cardBorder: '#E4E4E7',
+  inputBackground: '#F4F4F5', disabled: '#E4E4E7', disabledText: '#A1A1AA',
+  skeleton: '#E4E4E7', skeletonHighlight: '#F4F4F5',
+};
+
 export const lightTheme: Theme = {
   colors: {
     background: '#F5F5F7',
@@ -176,6 +199,7 @@ export const palettes: Record<PaletteName, { light: ThemeColors; dark: ThemeColo
   default: { light: lightTheme.colors, dark: darkTheme.colors },
   electric: { light: electricLightColors, dark: electricDarkColors },
   ember: { light: emberLightColors, dark: emberDarkColors },
+  emerald: { light: emeraldLightColors, dark: emeraldDarkColors },
 };
 
 export function buildTheme(palette: PaletteName, scheme: 'light' | 'dark'): Theme {

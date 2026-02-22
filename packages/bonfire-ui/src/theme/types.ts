@@ -85,30 +85,10 @@ export interface ThemeShadows {
 }
 
 export interface ThemeSizes {
-  inputHeight: {
-    sm: number;
-    md: number;
-    lg: number;
-  };
-  icon: {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
-  };
-  avatar: {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
-  };
-  buttonHeight: {
-    sm: number;
-    md: number;
-    lg: number;
-  };
+  inputHeight: { sm: number; md: number; lg: number };
+  icon: { xs: number; sm: number; md: number; lg: number; xl: number };
+  avatar: { xs: number; sm: number; md: number; lg: number; xl: number };
+  buttonHeight: { sm: number; md: number; lg: number };
   headerHeight: number;
   tabBarHeight: number;
 }
@@ -123,7 +103,7 @@ export interface Theme {
   isDark: boolean;
 }
 
-export type PaletteName = 'default' | 'electric' | 'ember' | 'emerald';
+export type PaletteName = 'default' | 'ocean' | 'lavender';
 
 export interface ThemeContextValue {
   theme: Theme;
